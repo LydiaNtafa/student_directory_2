@@ -7,7 +7,7 @@ connection = DatabaseConnection()
 connection.connect()
 
 # Seed with some seed data
-connection.seed("seeds/students_directory_2.sql")
+connection.seed("seeds/student_directory_2.sql")
 
 # Retrieve all artists
 cohorts_repository = CohortsRepository(connection)

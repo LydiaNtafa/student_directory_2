@@ -6,11 +6,15 @@ class CohortsRepository():
         self.connection = connection
 
     def find_cohort_with_students(self,id):
-        rows = self.connection.execute("SELECT * FROM cohorts JOIN students ON students.cohort_id = cohorts.id WHERE students.cohorts.id = %s",[id])
-        
+        rows = self.connection.execute("SELECT * FROM cohorts JOIN students \
+                                    ON students.cohort_id = cohorts.id \
+                                    WHERE students.cohort_id = %s",[id])
+        # print(rows)
         students = []
         for row in rows:
-            student = Student(row["id"], row["name"], row["cohort_id"])
+            student = Student(row["id"], row["student_name"], row["cohort_id"])
             students.append(student)
-        cohort = Cohort(rows[0]["cohorts_id"], rows[0]["name"], rows[0]["starting_date"],students)
+            # print("\n test students")
+            # print(students)
+        cohort = Cohort(rows[0]["cohort_id"], rows[0]["cohort_name"], rows[0]["starting_date"],students)
         return cohort
